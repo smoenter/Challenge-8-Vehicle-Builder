@@ -5,20 +5,46 @@ import Car from "./Car.js";
 import Motorbike from "./Motorbike.js";
 import Wheel from "./Wheel.js";
 
+
 // define the Cli class
 class Cli {
-  // TODO: update the vehicles property to accept Truck and Motorbike objects as well
-  // TODO: You will need to use the Union operator to define additional types for the array
-  // TODO: See the AbleToTow interface for an example of how to use the Union operator
-  vehicles: (Car)[];
+  vehicles: (Car | Truck | Motorbike)[];
   selectedVehicleVin: string | undefined;
   exit: boolean = false;
-
-  // TODO: Update the constructor to accept Truck and Motorbike objects as well
-  constructor(vehicles: (Car)[]) {
+  // TODO: update the vehicles property to accept Truck and Motorbike objects as well
+  constructor(vehicles: (Car | Truck | Motorbike)[]) {
     this.vehicles = vehicles;
   }
+  // TODO: You will need to use the Union operator to define additional types for the array
 
+  // TODO: See the AbleToTow interface for an example of how to use the Union operator
+  chooseVehicle(): void {
+    inquirer
+      .prompt([
+        {
+          type: 'list',
+          name: 'selectedVehicleVin',
+          message: 'Select a vehicle to perform an action on',
+          choices: this.vehicles.map((vehicle) => {
+            return {
+              name: `${vehicle.vin} -- ${vehicle.make} ${vehicle.model}`,
+              value: vehicle.vin,
+            };
+          }),
+        },
+      ])
+      .then((answers) => {
+        this.selectedVehicleVin = answers.selectedVehicleVin;
+        this.performActions();
+      });
+  }
+ 
+
+  // TODO: Update the constructor to accept Truck and Motorbike objects as well
+  constructor(vehicles: (Car |Truck | Motorbike)[]) {
+    this.vehicles = vehicles;
+  }
+  
   // static method to generate a vin
   static generateVin(): string {
     // return a random string
@@ -171,8 +197,11 @@ class Cli {
       ])
       .then((answers) => {
         // TODO: Use the answers object to pass the required properties to the Truck constructor
+             
         // TODO: push the truck to the vehicles array
+        this.vehicles.push(truck);
         // TODO: set the selectedVehicleVin to the vin of the truck
+       
         // TODO: perform actions on the truck
       });
   }
