@@ -57,8 +57,8 @@ constructor(
   // TODO: Check if the vehicle's weight is less than or equal to the truck's towing capacity 
   // TODO: If it is, log that the vehicle is being towed
   //TODO: If it is not, log that the vehicle is too heavy to be towed
-  tow(vehicleWeight: number): void {
-    if (vehicleWeight <= this.towingCapacity) {
+  tow(vehicle: Car | Truck | Motorbike): void {
+    if (vehicle.weight <= this.towingCapacity) {
       console.log('The vehicle is being towed.');
     } else {
       console.log('The vehicle is too heavy to be towed.');

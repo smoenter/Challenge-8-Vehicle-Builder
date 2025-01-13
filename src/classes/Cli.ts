@@ -14,6 +14,7 @@ class Cli {
   // TODO: Update the constructor to accept Truck and Motorbike objects as well
    vehicles: (Car | Truck | Motorbike)[] = [];
    selectedVehicleVin: string | null = null;
+   exit: boolean = false;
   
    constructor(vehicles: (Car | Truck | Motorbike)[]) {
     this.vehicles = vehicles;
@@ -183,8 +184,8 @@ class Cli {
           parseInt(answers.year),
           parseInt(answers.weight),
           parseInt(answers.topSpeed),
-          parseInt(answers.towingCapacity),
-          [] 
+          [new Wheel(answers.frontWheelDiameter, answers.frontWheelBrand), new Wheel(answers.rearWheelDiameter, answers.rearWheelBrand)],
+          parseInt(answers.towingCapacity), 
           );
         // TODO: push the truck to the vehicles array
         this.vehicles.push(truck);
@@ -390,7 +391,7 @@ class Cli {
         else if (answers.action === 'Tow') {
           for (let i = 0; i < this.vehicles.length; i++) {
             if (this.vehicles[i].vin === this.selectedVehicleVin && this.vehicles[i] instanceof Truck) {
-              this.findVehicleToTow(this.vehicles[i]);
+              this.findVehicleToTow(this.vehicles[i] as Truck);
               return;
             }
           }
