@@ -323,6 +323,8 @@ class Cli {
             'Turn right',
             'Turn left',
             'Reverse',
+            'Tow',
+            'Wheelie',
             'Select or create another vehicle',
             'Exit',
           ],
@@ -401,10 +403,11 @@ class Cli {
           // start the cli to return to the initial prompt if the user wants to select or create another vehicle
           this.startCli();
           return;
-        } else {
+        } else if(answers.action ==='Exit'){
           // exit the cli if the user selects exit
           this.exit = true;
         }
+        console.log(this.exit);
         if (!this.exit) {
           // if the user does not want to exit, perform actions on the selected vehicle
           this.performActions();
