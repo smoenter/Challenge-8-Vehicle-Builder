@@ -299,7 +299,7 @@ class Cli {
           console.log('A truck cannont tow itself');
           this.performActions();
         } else {
-          console.log('Towing ${selecetedVehicle.make} ${selectedVehicle.model}');
+          console.log(`Towing ${selectedVehicle.make} ${selectedVehicle.model}`);
           this.performActions();
         }
       });
